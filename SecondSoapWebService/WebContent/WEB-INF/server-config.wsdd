@@ -7,8 +7,8 @@
   <ns1:parameter name="dotNetSoapEncFix" value="true"/>
   <ns1:parameter name="enableNamespacePrefixOptimization" value="false"/>
   <ns1:parameter name="sendXMLDeclaration" value="true"/>
-  <ns1:parameter name="attachments.implementation" value="org.apache.axis.attachments.AttachmentsImpl"/>
   <ns1:parameter name="sendXsiTypes" value="true"/>
+  <ns1:parameter name="attachments.implementation" value="org.apache.axis.attachments.AttachmentsImpl"/>
   <ns1:requestFlow>
    <ns1:handler type="java:org.apache.axis.handlers.JWSHandler">
     <ns1:parameter name="scope" value="session"/>
@@ -22,17 +22,7 @@
  <ns1:handler name="URLMapper" type="java:org.apache.axis.handlers.http.URLMapper"/>
  <ns1:handler name="Authenticate" type="java:org.apache.axis.handlers.SimpleAuthenticationHandler"/>
  <ns1:handler name="LocalResponder" type="java:org.apache.axis.transport.local.LocalResponder"/>
- <ns1:service name="AdminService" provider="java:MSG">
-  <ns1:parameter name="allowedMethods" value="AdminService"/>
-  <ns1:parameter name="enableRemoteAdmin" value="false"/>
-  <ns1:parameter name="className" value="org.apache.axis.utils.Admin"/>
-  <ns1:namespace>http://xml.apache.org/axis/wsdd/</ns1:namespace>
- </ns1:service>
- <ns1:service name="Version" provider="java:RPC">
-  <ns1:parameter name="allowedMethods" value="getVersion"/>
-  <ns1:parameter name="className" value="org.apache.axis.Version"/>
- </ns1:service>
- <ns1:service name="PersonService" provider="java:RPC">
+ <ns1:service name="PersonServiceImpl" provider="java:RPC">
   <ns2:operation name="deletePerson" qname="ns1:deletePerson" returnQName="deletePersonReturn" returnType="xsd:string" soapAction="" xmlns:ns1="http://med.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns2="http://xml.apache.org/axis/wsdd/">
    <ns2:parameter name="id" type="xsd:int"/>
   </ns2:operation>
@@ -52,14 +42,53 @@
   </ns1:operation>
   <ns1:parameter name="allowedMethods" value="deletePerson getPerson getPersons createPerson updatePerson"/>
   <ns1:parameter name="typeMappingVersion" value="1.2"/>
+  <ns1:parameter name="wsdlPortType" value="PersonServiceImpl"/>
+  <ns1:parameter name="className" value="com.med.PersonServiceImpl"/>
+  <ns1:parameter name="wsdlServicePort" value="PersonServiceImpl"/>
+  <ns1:parameter name="wsdlTargetNamespace" value="http://med.com"/>
+  <ns1:parameter name="wsdlServiceElement" value="PersonServiceImplService"/>
+  <ns1:parameter name="schemaUnqualified" value="http://med.com"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns6:Person" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:com.med.Person" xmlns:ns6="http://med.com"/>
+  <ns1:arrayMapping innerType="xsd:anyType" languageSpecificType="java:java.lang.Object[]" qname="ns7:ArrayOf_xsd_anyType" xmlns:ns7="http://med.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+ </ns1:service>
+ <ns1:service name="AdminService" provider="java:MSG">
+  <ns1:parameter name="allowedMethods" value="AdminService"/>
+  <ns1:parameter name="enableRemoteAdmin" value="false"/>
+  <ns1:parameter name="className" value="org.apache.axis.utils.Admin"/>
+  <ns1:namespace>http://xml.apache.org/axis/wsdd/</ns1:namespace>
+ </ns1:service>
+ <ns1:service name="Version" provider="java:RPC">
+  <ns1:parameter name="allowedMethods" value="getVersion"/>
+  <ns1:parameter name="className" value="org.apache.axis.Version"/>
+ </ns1:service>
+ <ns1:service name="PersonService" provider="java:RPC">
+  <ns1:operation name="deletePerson" qname="ns8:deletePerson" returnQName="deletePersonReturn" returnType="xsd:string" soapAction="" xmlns:ns8="http://med.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter name="id" type="xsd:int"/>
+  </ns1:operation>
+  <ns1:operation name="getPerson" qname="ns9:getPerson" returnQName="getPersonReturn" returnType="ns9:Person" soapAction="" xmlns:ns9="http://med.com">
+   <ns1:parameter name="id" type="xsd:int" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  </ns1:operation>
+  <ns1:operation name="updatePerson" qname="ns10:updatePerson" returnQName="updatePersonReturn" returnType="xsd:string" soapAction="" xmlns:ns10="http://med.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter name="id" type="xsd:int"/>
+   <ns1:parameter name="name" type="xsd:string"/>
+   <ns1:parameter name="age" type="xsd:int"/>
+  </ns1:operation>
+  <ns1:operation name="getPersons" qname="ns11:getPersons" returnQName="getPersonsReturn" returnType="ns11:ArrayOf_xsd_anyType" soapAction="" xmlns:ns11="http://med.com"/>
+  <ns1:operation name="createPerson" qname="ns12:createPerson" returnQName="createPersonReturn" returnType="xsd:string" soapAction="" xmlns:ns12="http://med.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter name="id" type="xsd:int"/>
+   <ns1:parameter name="name" type="xsd:string"/>
+   <ns1:parameter name="age" type="xsd:int"/>
+  </ns1:operation>
+  <ns1:parameter name="allowedMethods" value="deletePerson getPerson getPersons createPerson updatePerson"/>
   <ns1:parameter name="wsdlPortType" value="PersonService"/>
-  <ns1:parameter name="className" value="com.med.PersonService"/>
+  <ns1:parameter name="typeMappingVersion" value="1.2"/>
   <ns1:parameter name="wsdlServicePort" value="PersonService"/>
+  <ns1:parameter name="className" value="com.med.PersonService"/>
   <ns1:parameter name="wsdlTargetNamespace" value="http://med.com"/>
   <ns1:parameter name="wsdlServiceElement" value="PersonServiceService"/>
   <ns1:parameter name="schemaUnqualified" value="http://med.com,http://xml.apache.org/xml-soap"/>
-  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns6:Person" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:com.med.Person" xmlns:ns6="http://med.com"/>
-  <ns1:arrayMapping innerType="xsd:anyType" languageSpecificType="java:java.lang.Object[]" qname="ns7:ArrayOf_xsd_anyType" xmlns:ns7="http://med.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns13:Person" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:com.med.Person" xmlns:ns13="http://med.com"/>
+  <ns1:arrayMapping innerType="xsd:anyType" languageSpecificType="java:java.lang.Object[]" qname="ns14:ArrayOf_xsd_anyType" xmlns:ns14="http://med.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
  </ns1:service>
  <ns1:transport name="http">
   <ns1:requestFlow>
