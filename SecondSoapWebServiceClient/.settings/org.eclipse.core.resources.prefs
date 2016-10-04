@@ -1,0 +1,16 @@
+eclipse.preferences.version=1
+encoding//src/com/med/CreatePerson.java=UTF-8
+encoding//src/com/med/CreatePersonResponse.java=UTF-8
+encoding//src/com/med/DeletePerson.java=UTF-8
+encoding//src/com/med/DeletePersonResponse.java=UTF-8
+encoding//src/com/med/GetPerson.java=UTF-8
+encoding//src/com/med/GetPersonResponse.java=UTF-8
+encoding//src/com/med/GetPersons.java=UTF-8
+encoding//src/com/med/GetPersonsResponse.java=UTF-8
+encoding//src/com/med/Person.java=UTF-8
+encoding//src/com/med/PersonService.java=UTF-8
+encoding//src/com/med/PersonServiceService.java=UTF-8
+encoding//src/com/med/PersonServiceServiceLocator.java=UTF-8
+encoding//src/com/med/PersonServiceSoapBindingStub.java=UTF-8
+encoding//src/com/med/UpdatePerson.java=UTF-8
+encoding//src/com/med/UpdatePersonResponse.java=UTF-8

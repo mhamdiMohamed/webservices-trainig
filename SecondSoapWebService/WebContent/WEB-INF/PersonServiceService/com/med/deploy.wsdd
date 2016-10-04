@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- Use this file to deploy some handlers/chains and services      --><!-- Two ways to do this:                                           --><!--   java org.apache.axis.client.AdminClient deploy.wsdd          --><!--      after the axis server is running                          --><!-- or                                                             --><!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   --><!--      from the same directory that the Axis engine runs         --><deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from PersonServiceService WSDL service -->
+
+  <service name="PersonService" provider="java:RPC" style="rpc" use="encoded">
+      <parameter name="wsdlTargetNamespace" value="http://med.com"/>
+      <parameter name="wsdlServiceElement" value="PersonServiceService"/>
+      <parameter name="schemaUnqualified" value="http://med.com,http://xml.apache.org/xml-soap"/>
+      <parameter name="wsdlServicePort" value="PersonService"/>
+      <parameter name="className" value="com.med.PersonService"/>
+      <parameter name="wsdlPortType" value="PersonService"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation xmlns:operNS="http://med.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="deletePerson" qname="operNS:deletePerson" returnQName="deletePersonReturn" returnType="rtns:string" soapAction="">
+        <parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="id" type="tns:int"/>
+      </operation>
+      <operation xmlns:operNS="http://med.com" xmlns:rtns="http://med.com" name="getPerson" qname="operNS:getPerson" returnQName="getPersonReturn" returnType="rtns:Person" soapAction="">
+        <parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="id" type="tns:int"/>
+      </operation>
+      <operation xmlns:operNS="http://med.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="updatePerson" qname="operNS:updatePerson" returnQName="updatePersonReturn" returnType="rtns:string" soapAction="">
+        <parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="id" type="tns:int"/>
+        <parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="name" type="tns:string"/>
+        <parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="age" type="tns:int"/>
+      </operation>
+      <operation xmlns:operNS="http://med.com" xmlns:rtns="http://med.com" xmlns:tns2="http://www.w3.org/2001/XMLSchema" name="getPersons" qname="operNS:getPersons" returnQName="getPersonsReturn" returnType="rtns:ArrayOf_xsd_anyType" returnItemType="tns2:anyType" soapAction="">
+      </operation>
+      <operation xmlns:operNS="http://med.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="createPerson" qname="operNS:createPerson" returnQName="createPersonReturn" returnType="rtns:string" soapAction="">
+        <parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="id" type="tns:int"/>
+        <parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="name" type="tns:string"/>
+        <parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="age" type="tns:int"/>
+      </operation>
+      <parameter name="allowedMethods" value="deletePerson getPerson getPersons createPerson updatePerson"/>
+
+      <typeMapping xmlns:ns="http://med.com" qname="ns:Person" type="java:com.med.Person" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      <arrayMapping xmlns:ns="http://med.com" xmlns:cmp-ns="http://www.w3.org/2001/XMLSchema" qname="ns:ArrayOf_xsd_anyType" type="java:java.lang.Object[]" innerType="cmp-ns:anyType" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+  </service>
+</deployment>
